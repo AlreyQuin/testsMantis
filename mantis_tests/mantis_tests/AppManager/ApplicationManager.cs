@@ -27,6 +27,8 @@ namespace mantis_tests
             baseURL = "http://localhost/";
             RegistHelper = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
+            Logon = new LoginHelper(this);
+            Project = new ProjectHelper(this);
 
             verificationErrors = new StringBuilder();
 
@@ -67,5 +69,7 @@ namespace mantis_tests
         public FtpHelper Ftp { get; set; }
 
         public LoginHelper Logon { get; set; }
+
+        public ProjectHelper Project { get; set; }
     }
 }

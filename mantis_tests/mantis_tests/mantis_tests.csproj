@@ -67,6 +67,7 @@
     <Compile Include="AppManager\LoginHelper.cs" />
     <Compile Include="AppManager\ProjectHelper.cs" />
     <Compile Include="AppManager\RegistrationHelper.cs" />
+    <Compile Include="Model\ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\AccountData.cs" />
     <Compile Include="Tests\BaseClassTest.cs" />
