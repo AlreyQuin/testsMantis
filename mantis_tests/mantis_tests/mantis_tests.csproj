@@ -47,6 +47,15 @@
     <Reference Include="nunit.framework, Version=2.6.5.18109, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnit.2.6.5\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="RazorHosting, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\RazorHosting.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleBrowser, Version=0.5.61.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.0.5.61.0\lib\net40\SimpleBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleBrowser.WebDriver, Version=0.5.37.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleBrowser.WebDriver.0.5.37\lib\net40\SimpleBrowser.WebDriver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -61,12 +70,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppManager\AdminHelper.cs" />
     <Compile Include="AppManager\ApplicationManager.cs" />
     <Compile Include="AppManager\FtpHelper.cs" />
     <Compile Include="AppManager\HelperBase.cs" />
+    <Compile Include="AppManager\JamesHelper.cs" />
     <Compile Include="AppManager\LoginHelper.cs" />
     <Compile Include="AppManager\ProjectHelper.cs" />
     <Compile Include="AppManager\RegistrationHelper.cs" />
+    <Compile Include="AppManager\TelnetInterface.cs" />
     <Compile Include="Model\ProjectData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\AccountData.cs" />

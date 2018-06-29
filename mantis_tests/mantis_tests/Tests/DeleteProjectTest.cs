@@ -31,6 +31,9 @@ namespace mantis_tests
                 app.Project.CreateProject(prog);
             }
 
+            List<ProjectData> oldList = app.Project.GetProjectList();
+            ProjectData removePr = oldList[0];
+
             int oldPr = app.Project.GetProjectCount();
 
             app.Project.SelectProgect();
@@ -39,6 +42,9 @@ namespace mantis_tests
 
             int newPr = app.Project.GetProjectCount();
             Assert.AreEqual(oldPr - 1, newPr);
+
+            List<ProjectData> newList = app.Project.GetProjectList();
+            Assert.AreEqual(oldList, newList);
 
         }
     }
