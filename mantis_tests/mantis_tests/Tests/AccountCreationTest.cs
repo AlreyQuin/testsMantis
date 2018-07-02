@@ -38,7 +38,7 @@ namespace mantis_tests
 
             if (existAcc != null)
             {
-                app.Admin.DeleteAccount(account);
+                app.Admin.DeleteAccount(existAcc);
             }
             
 

@@ -28,9 +28,10 @@ namespace mantis_tests
             RegistHelper = new RegistrationHelper(this);
             Ftp = new FtpHelper(this);
             Logon = new LoginHelper(this);
-            Project = new ProjectHelper(this);
+            Project = new ProjectHelper(this, baseURL);
             James = new JamesHelper(this);
             Admin = new AdminHelper(this, baseURL);
+            Api = new APIHelper(this);
 
             verificationErrors = new StringBuilder();
 
@@ -77,5 +78,7 @@ namespace mantis_tests
         public JamesHelper James { get; set; }
 
         public AdminHelper Admin { get; set; }
+
+        public APIHelper Api { get; set; }
     }
 }

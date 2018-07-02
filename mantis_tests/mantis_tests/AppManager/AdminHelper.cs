@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
-using SimpleBrowser.WebDriver;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 using System.Text.RegularExpressions;
 
 namespace mantis_tests
@@ -18,10 +19,16 @@ namespace mantis_tests
             this.baseUrl = baseUrl;
         }
 
+        AccountData admin = new AccountData()
+        {
+            Name = "administrator",
+            Pass = "root",
+        };
+
         public List<AccountData> GetAllAccounts()
         {
             List<AccountData> accounts = new List<AccountData>();
-            IWebDriver driver = OpenAppAndLogin();
+            manager.Logon.Login(admin);
             driver.Url = baseUrl + "manage_user_page.php";
             IList<IWebElement> rows = driver.FindElements(By.CssSelector("tbody > tr"));
             foreach (IWebElement row in rows)
@@ -43,21 +50,10 @@ namespace mantis_tests
 
         public void DeleteAccount(AccountData account)
         {
-            IWebDriver driver = OpenAppAndLogin();
+            manager.Logon.Login(admin);
             driver.Url = baseUrl + "manage_user_edit_page.php?user_id=" + account.Id;
             driver.FindElement(By.CssSelector("input[value='Удалить учетную запись'] ")).Click();
             driver.FindElement(By.CssSelector("input[value='Удалить учетную запись'] ")).Click();
-        }
-
-        public IWebDriver OpenAppAndLogin()
-        {
-            IWebDriver driver = new SimpleBrowserDriver();
-            driver.Url = baseUrl + "login_page.php";
-            driver.FindElement(By.Name("username")).SendKeys("administrator");
-            driver.FindElement(By.CssSelector("input[value='Войти'] ")).Click();
-            driver.FindElement(By.Name("password")).SendKeys("root");
-            driver.FindElement(By.CssSelector("input[value='Войти'] ")).Click();
-            return driver;
         }
 
     }

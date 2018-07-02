@@ -61,7 +61,7 @@ namespace mantis_tests
         private string GetLoggetUserName()
         {
             string text = driver.FindElement(By.CssSelector("span[class='user-info']")).Text;
-            return text.Substring(1, text.Length - 2);
+            return text;
                 
         }
     }

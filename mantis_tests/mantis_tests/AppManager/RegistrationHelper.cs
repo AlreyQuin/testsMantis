@@ -24,7 +24,7 @@ namespace mantis_tests
 
         void OpenRegistrationForm()
         {
-            driver.FindElement(By.CssSelector("div[class='widget-body'] > [class='toolbar center'] > a")).Click();
+            driver.FindElement(By.CssSelector("button[class='btn btn-primary btn-white btn-round']")).Click();
         }
 
         public void SubmitRegistration()
@@ -40,7 +40,7 @@ namespace mantis_tests
 
         public void OpenMainPage()
         {
-            manager.Driver.Url = "http://localhost/mantisbt-2.15.0/login_page.php";
+            manager.Driver.Url = "http://localhost/mantisbt-2.15.0/manage_user_page.php";
         }
     }
 }

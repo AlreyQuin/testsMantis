@@ -13,38 +13,44 @@ namespace mantis_tests
         [Test]
         public void TestDeleteProject()
         {
-            AccountData admin = new AccountData()
+            AccountData account = new AccountData()
             {
                 Name = "administrator",
                 Pass = "root"
             };
-
-            ProjectData prog = new ProjectData()
+            ProjectData proj = new ProjectData()
             {
                 Name = "Test Project",
             };
 
-            app.Logon.Login(admin);
             app.Project.GotoProjectPage();
-            if (!app.Project.FindProject())
+
+            //List<ProjectData> oldList = app.Project.GetProjectList();
+            List<ProjectData> oldList = app.Api.GetAllProjects(account);
+            ProjectData existPr = oldList.Find(x => x.Name == proj.Name);
+            if (existPr == null)
             {
-                app.Project.CreateProject(prog);
+                app.Api.AddProjects(account, proj);
+                oldList.Add(proj);
             }
 
-            List<ProjectData> oldList = app.Project.GetProjectList();
-            ProjectData removePr = oldList[0];
+            int oldPr = oldList.Count;
 
-            int oldPr = app.Project.GetProjectCount();
-
-            app.Project.SelectProgect();
+            app.Project.SelectProgect(proj);
             app.Project.DeleteProject();
             app.Project.SubmitDeleteProject();
 
-            int newPr = app.Project.GetProjectCount();
+            var removeItem = oldList.SingleOrDefault(x => x.Name == proj.Name);
+            oldList.Remove(removeItem);
+            var oldNames = oldList.Select(x => x.Name).ToList();
+            oldNames.Sort();
+            //List<ProjectData> newList = app.Project.GetProjectList();
+            List<ProjectData> newList = app.Api.GetAllProjects(account);
+            var newNames = newList.Select(x => x.Name).ToList();
+            newNames.Sort();
+            int newPr = newList.Count;
             Assert.AreEqual(oldPr - 1, newPr);
-
-            List<ProjectData> newList = app.Project.GetProjectList();
-            Assert.AreEqual(oldList, newList);
+            Assert.AreEqual(oldNames, newNames);
 
         }
     }
