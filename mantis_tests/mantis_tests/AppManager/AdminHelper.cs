@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 using SimpleBrowser.WebDriver;
+using System.Text.RegularExpressions;
 
 namespace mantis_tests
 {
@@ -19,7 +20,25 @@ namespace mantis_tests
 
         public List<AccountData> GetAllAccounts()
         {
-            return null;
+            List<AccountData> accounts = new List<AccountData>();
+            IWebDriver driver = OpenAppAndLogin();
+            driver.Url = baseUrl + "manage_user_page.php";
+            IList<IWebElement> rows = driver.FindElements(By.CssSelector("tbody > tr"));
+            foreach (IWebElement row in rows)
+            {
+                IWebElement a = row.FindElement(By.TagName("a"));
+                string name = a.Text;
+                string href = a.GetAttribute("href");
+                Match m = Regex.Match(href, @"\d+$");
+                string id = m.Value;
+
+                accounts.Add(new AccountData()
+                {
+                    Name = name,
+                    Id = id
+                });
+            }
+            return accounts;
         }
 
         public void DeleteAccount(AccountData account)
